@@ -12,6 +12,7 @@ const signup = async (req, res) => {
       email: email,
     });
     const saveuser = await createduser.save();
+    console.log("added user");
     res.status(200).send({
       status: "success",
       message: "user saved successfully",
@@ -36,7 +37,7 @@ const login = async (req, res) => {
         message: "user does not exist",
       });
     }
-    const match = (password === user.password);
+    const match = password === user.password;
     if (!match) {
       return res.status(401).send({
         status: "failure",
