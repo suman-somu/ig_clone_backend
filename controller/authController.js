@@ -1,18 +1,18 @@
 //user login, logout and register
-const user = require("../models/userModel");
-const jwt = require("jsonwebtoken");
+const User = require("../models/userModel");
+const tokens = require("../utils/tokens");
 
 const signup = async (req, res) => {
   try {
     const data = req.body;
     const { username, password, email } = data;
-    const createduser = new user({
+    const createduser = new User({
       username: username,
       password: password,
       email: email,
     });
     const saveuser = await createduser.save();
-    console.log("added user");
+    console.log(username + "signup successful");
     res.status(200).send({
       status: "success",
       message: "user saved successfully",
@@ -30,12 +30,13 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
   try {
     const { username, password } = req.body;
-    const user = await user.findOne({ username: username });
+    const query = User.where({ username: username });
+    const user = await query.findOne();
     if (!user) {
       return res.status(401).send({
         status: "failure",
         message: "user does not exist",
-      });
+      }); 
     }
     const match = password === user.password;
     if (!match) {
@@ -44,8 +45,8 @@ const login = async (req, res) => {
         message: "password is incorrect",
       });
     }
-    const accessToken = generateToken.generateAccessToken(user);
-    const refreshToken = generateToken.generateRefreshToken(user);
+    const accessToken = tokens.AccessToken(user);
+    const refreshToken = tokens.RefreshToken(user);
     await User.findByIdAndUpdate(user._id, {
       jwtToken: refreshToken,
     });
