@@ -21,7 +21,7 @@ const post = async (req, res) => {
 
     const postid = Number ( year + month + day + hours + minutes + seconds );
     const { caption } = req.body;
-    const filepath = req.file.path;
+    const filepath = req.files.map((file) => file.path);
 
     const createdpost = new Post({
       postid: postid,

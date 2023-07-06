@@ -11,7 +11,7 @@ const PostSchema = new mongoose.Schema({
     default: null,
   },
   filepath: {
-    type: String,
+    type: [String],
     required: true,
   },
 });
