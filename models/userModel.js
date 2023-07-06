@@ -1,6 +1,22 @@
 const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
+  nameofuser: {
+    type: String,
+    required: true,
+  },
+  password: {
+    type: String,
+    require: true,
+    min: 6,
+  },
+  birthday: {
+    type: Date,
+    required: true,
+  },
+  mobile: {
+    type: Number,
+  },
   username: {
     type: String,
     required: true,
@@ -15,11 +31,6 @@ const UserSchema = new mongoose.Schema({
     max: 50,
     unique: true,
   },
-  password: {
-    type: String,
-    require: true,
-    min: 6,
-  },
   bio: {
     type: String,
     max: 50,
@@ -30,12 +41,16 @@ const UserSchema = new mongoose.Schema({
     default: "YOUR_DEFAULT_AVATAR_URL",
   },
   followers: {
-    type: Array,
+    type: [Number],
     default: [],
   },
   following: {
-    type: Array,
+    type: [Number],
     default: [],
+  },
+  posts: {
+    type: [Number],
+    deafult: [],
   },
   role: {
     type: String,
@@ -45,8 +60,9 @@ const UserSchema = new mongoose.Schema({
   },
   gender: {
     type: String,
-    enum: ["male", "female"],
+    enum: ["male", "female", "others"],
   },
+  
   jwtToken: {
     type: String,
   },
