@@ -46,9 +46,8 @@ const login = async (req, res) => {
       });
     }
     const accessToken = tokens.AccessToken(user);
-    const refreshToken = tokens.RefreshToken(user);
     await User.findByIdAndUpdate(user._id, {
-      jwtToken: refreshToken,
+      jwtToken: accessToken,
     });
     const { jwtToken, password: newpass, ...other } = user._doc;
     res.status(200).send({
@@ -56,7 +55,6 @@ const login = async (req, res) => {
       message: "logged in successfully",
       data: other,
       accessToken,
-      refreshToken,
     });
   } catch (e) {
     res.status(500).send({
