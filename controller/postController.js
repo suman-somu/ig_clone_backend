@@ -1,25 +1,28 @@
 const Post = require("../models/postModel");
+const User = require("../models/userModel");
+const pid = require("../utils/postid");
 
-// const multer = require('multer');
-
-// const upload = multer({dest: '__dirname' + '../../uploads/images'});
 
 const post = async (req, res) => {
-  // console.log(req);
   try {
-    //make postid
-    //the images are stored, retreive the path
-    //store caption
+    const { username, accessToken } = req.body;
+    const query = User.where({ username: username });
+    const user = await query.findOne();
+    if (!user) {
+      return res.status(401).send({
+        status: "failure",
+        message: "user does not exist",
+      }); 
+    }
+    const match = accessToken === user.accessToken;
+    if (!match) {
+      return res.status(401).send({
+        status: "failure",
+        message: "Not Authorised tp post",
+      });
+    }
 
-    const currentDate = new Date();
-    const year = currentDate.getFullYear().toString();
-    const month = (currentDate.getMonth() + 1).toString().padStart(2, "0"); // Months are zero-based
-    const day = currentDate.getDate().toString().padStart(2, "0");
-    const hours = currentDate.getHours().toString().padStart(2, "0");
-    const minutes = currentDate.getMinutes().toString().padStart(2, "0");
-    const seconds = currentDate.getSeconds().toString().padStart(2, "0");
-
-    const postid = Number ( year + month + day + hours + minutes + seconds );
+    const postid = pid();
     const { caption } = req.body;
     const filepath = req.files.map((file) => file.path);
 
@@ -31,10 +34,10 @@ const post = async (req, res) => {
 
     const savepost = await createdpost.save();
 
-    console.log("saved successful");
+    console.log("posted successful");
     res.status(200).send({
       status: "success",
-      message: "user saved successfully",
+      message: "posted successfully",
     });
   } catch (e) {
     res.status(500).send({

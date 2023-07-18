@@ -47,7 +47,7 @@ const login = async (req, res) => {
     }
     const accessToken = tokens.AccessToken(user);
     await User.findByIdAndUpdate(user._id, {
-      jwtToken: accessToken,
+      accessToken: accessToken,
     });
     const { jwtToken, password: newpass, ...other } = user._doc;
     res.status(200).send({

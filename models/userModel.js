@@ -63,7 +63,7 @@ const UserSchema = new mongoose.Schema({
     enum: ["male", "female", "others"],
   },
   
-  jwtToken: {
+  accessToken: {
     type: String,
   },
 });
