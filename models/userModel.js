@@ -50,7 +50,7 @@ const UserSchema = new mongoose.Schema({
   },
   posts: {
     type: [Number],
-    deafult: [],
+    default: [],
   },
   role: {
     type: String,
