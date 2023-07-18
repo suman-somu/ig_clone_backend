@@ -34,12 +34,16 @@ const post = async (req, res) => {
 
     const savepost = await createdpost.save();
 
+    user.posts.push(postid);
+    await user.save();
+
     console.log("posted successful");
     res.status(200).send({
       status: "success",
       message: "posted successfully",
     });
   } catch (e) {
+    console.log(e);
     res.status(500).send({
       status: "failure",
       message: e.message,

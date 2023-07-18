@@ -5,14 +5,16 @@ const tokens = require("../utils/tokens");
 const signup = async (req, res) => {
   try {
     const data = req.body;
-    const { username, password, email } = data;
+    const { nameofuser, birthday, username, password, email } = data;
     const createduser = new User({
-      username: username,
+      nameofuser: nameofuser,
       password: password,
+      birthday: birthday,
+      username: username,
       email: email,
     });
     const saveuser = await createduser.save();
-    console.log(username + "signup successful");
+    console.log(username + " signup successful");
     res.status(200).send({
       status: "success",
       message: "user saved successfully",
