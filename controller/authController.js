@@ -67,10 +67,10 @@ const login = async (req, res) => {
 };
 const logout = async (req, res) => {
   try {
-    const { refreshToken } = req.body;
-    if (refreshToken) {
-      await User.updateOne({ jwtToken: refreshToken }, [
-        { $unset: ["jwtToken"] },
+    const { accessToken } = req.body;
+    if (accessToken) {
+      await User.updateOne({ accessToken: accessToken }, [
+        { $unset: ["accessToken"] },
       ]);
       res.status(200).send({
         status: "success",
@@ -83,6 +83,7 @@ const logout = async (req, res) => {
       });
     }
   } catch (e) {
+    console.log(e);
     res.status(500).send({
       status: "failure",
       message: e.message,
