@@ -31,8 +31,8 @@ const signup = async (req, res) => {
 };
 const login = async (req, res) => {
   try {
-    const { username, password } = req.body;
-    const query = User.where({ username: username });
+    const { email, username, password } = req.body;
+    const query = (email==null)?User.where({ username: username }):User.where({ email: email });
     const user = await query.findOne();
     if (!user) {
       return res.status(401).send({
