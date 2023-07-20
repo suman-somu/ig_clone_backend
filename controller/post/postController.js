@@ -1,6 +1,6 @@
-const Post = require("../models/postModel");
-const User = require("../models/userModel");
-const pid = require("../utils/postid");
+const Post = require("../../models/postModel");
+const User = require("../../models/userModel");
+const pid = require("../../utils/postid");
 const appwriteUpload = require("./appwrite_upload");
 
 const post = async (req, res) => {
