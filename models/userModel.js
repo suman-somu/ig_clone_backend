@@ -7,8 +7,17 @@ const UserSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    require: true,
+    required: true,
     min: 6,
+    validate: {
+      validator: function (value) {
+        // Regular expression to validate password contains atleast 1 small character, 1 capital character, 1 number, 1 special character
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+        return passwordRegex.test(value);
+      },
+      message: (props) =>
+        "Password must contain at least 1 lowercase, 1 uppercase, 1 number, and 1 special character, and be at least 6 characters long!",
+    },
   },
   birthday: {
     type: Date,
@@ -30,6 +39,14 @@ const UserSchema = new mongoose.Schema({
     min: 4,
     max: 50,
     unique: true,
+    // Regular expression to validate email
+    validate: {
+      validator: function (value) {
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        return emailRegex.test(value);
+      },
+      message: (props) => `${props.value} is not a valid email!`,
+    },
   },
   bio: {
     type: String,
