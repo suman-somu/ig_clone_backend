@@ -1,6 +1,6 @@
 const User = require("../../models/userModel.js");
 const connectDB = require("../../config/db.js");
-const filterPublicProfile = require("../../utils/filter.js");
+const {filterPublicProfile} = require("../../utils/filter.js");
 
 connectDB();
 
