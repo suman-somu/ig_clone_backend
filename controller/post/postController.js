@@ -21,7 +21,6 @@ const post = async (req, res) => {
         message: "Not Authorised tp post",
       });
     }
-
     const filepath = req.files.map((file) => file.path);
 
     for (const file of filepath) {
@@ -29,7 +28,6 @@ const post = async (req, res) => {
       const lastpart = parts[parts.length - 1];
       filepath[filepath.indexOf(file)] = lastpart;
     }
-
     //upload image to appwrite
     if (appwriteUpload(filepath)) {
       const postid = pid();
@@ -56,7 +54,7 @@ const post = async (req, res) => {
       });
     }
 
-    console.log("posted successful");
+    console.log(username+ " posted successfully");
     res.status(200).send({
       status: "success",
       message: "posted successfully",

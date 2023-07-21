@@ -52,6 +52,7 @@ const login = async (req, res) => {
       accessToken: accessToken,
     });
     const { jwtToken, password: newpass, ...other } = user._doc;
+    console.log(username + " log in successful")
     res.status(200).send({
       status: "success",
       message: "logged in successfully",
@@ -72,6 +73,7 @@ const logout = async (req, res) => {
       await User.updateOne({ accessToken: accessToken }, [
         { $unset: ["accessToken"] },
       ]);
+      console.log("logged out successfully")
       res.status(200).send({
         status: "success",
         message: "You've been logged out",
