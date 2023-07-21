@@ -1,25 +1,35 @@
 const User = require("../../models/userModel.js");
-const connectDB = require("../../config/db.js");
+const {filterPublicProfileSearch}  = require("../../utils/filter.js");
 
-connectDB();
 
-const keywords = "Su";
-
-const searchPrediction = async (keywords) => {
+const searchPrediction = async (req, res) => {
   try {
+    const keywords = req.query["keywords"];
     const regexPattern = new RegExp(`^${keywords}`, "i");
-    const accounts = await User.find({ nameofuser: regexPattern });
-    return accounts;
+    var accounts = await User.find({ username: regexPattern });
+    if (accounts.length === 0) {
+      return res.status(200).send({
+        status: "success",
+        message: "No accounts found",
+        data: [],
+      });
+    }
+
+    accounts = filterPublicProfileSearch(accounts);
+    return res.status(200).send({
+      status: "success",
+      message: "Accounts found",
+      data: accounts,
+    });
+
   } catch (error) {
     console.error("Error:", error);
-    return [];
+    return res.status(500).send({
+      status: "failure",
+      message: "An error occurred",
+      data: [],
+    });
   }
 };
 
-searchPrediction(keywords)
-  .then((accounts) => {
-    console.log("Matching Accounts:", accounts);
-  })
-  .catch((error) => {
-    console.error("Error:", error);
-  });
+module.exports = {searchPrediction};

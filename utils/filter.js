@@ -4,4 +4,17 @@ const filterPublicProfile = (jsonUserData) => {
     return {nameofuser, username, bio, profilePicture, followers, following, posts, role, gender};
     }
 
-module.exports = filterPublicProfile;
+const filterForSearchUtil= (jsonUserData) => {
+    const { nameofuser, username, profilePicture } = jsonUserData;
+    return {nameofuser, username, profilePicture};
+    }
+const filterPublicProfileSearch = (jsonUserData) => {
+
+    for( i=0; i<jsonUserData.length; i++){
+        jsonUserData[i] = filterForSearchUtil(jsonUserData[i]);
+    }
+    
+    return jsonUserData;
+    }
+
+module.exports = {filterPublicProfile, filterPublicProfileSearch};
