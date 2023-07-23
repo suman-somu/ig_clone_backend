@@ -1,25 +1,24 @@
 const User = require("../../models/userModel.js");
-const connectDB = require("../../config/db.js");
-const {filterPublicProfile} = require("../../utils/filter.js");
+const { filterPublicProfile } = require("../../utils/filter.js");
 
-connectDB();
-
-const username = "sam";
-
-const searchProfile = async (username) => {
+const searchProfile = async (req, res) => {
   try {
-    const account = filterPublicProfile( await User.findOne({ username: username }));
-    return account;
+    const username = req.query.searchAccountUsername;
+    const account = filterPublicProfile(
+      await User.findOne({ username: username })
+    );
+    if (!account) {
+      return res.status(404).json({ message: "Account not found" });
+    }
+    console.log("Account:", account);
+    return res.status(200).send({
+      status: "success",
+      message: "Account accessed",
+      data: account,
+    });
   } catch (error) {
     console.error("Error:", error);
     return [];
   }
 };
-
-searchProfile(username)
-  .then((account) => {
-    console.log("Matching Accounts:", account);
-  })
-  .catch((error) => {
-    console.error("Error:", error);
-  });
+module.exports = { searchProfile };
