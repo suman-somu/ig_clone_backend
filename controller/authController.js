@@ -52,7 +52,8 @@ const login = async (req, res) => {
       accessToken: accessToken,
     });
     const { jwtToken, password: newpass, ...other } = user._doc;
-    console.log(username + " log in successful")
+
+    console.log(user.username + " log in successful")
     res.status(200).send({
       status: "success",
       message: "logged in successfully",

@@ -58,11 +58,11 @@ const UserSchema = new mongoose.Schema({
     default: "YOUR_DEFAULT_AVATAR_URL",
   },
   followers: {
-    type: [Number],
+    type: [String],
     default: [],
   },
   following: {
-    type: [Number],
+    type: [String],
     default: [],
   },
   posts: {

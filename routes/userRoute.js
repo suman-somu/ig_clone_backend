@@ -16,5 +16,7 @@ router.post("/post",upload.array('photo', 10), postController.post);
 router.post("/profile", profileController.getProfileInfo);
 router.get("/search", searchPrediction.searchPrediction);
 router.get("/search/account", searchProfile.searchProfile);
+router.put("/search/account", searchProfile.followProfile);
+router.delete("/search/account", searchProfile.unfollowProfile);
 
 module.exports = router;
