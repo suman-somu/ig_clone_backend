@@ -5,6 +5,7 @@ const profileController = require("../controller/profileController");
 const searchPrediction = require("../controller/search/search_prediction");
 const searchProfile = require("../controller/search/search_profile");
 const getPostDetails = require("../controller/post/postDetails");
+const feed = require("../controller/feed/feedController");
 
 
 const multer = require('multer');
@@ -20,5 +21,6 @@ router.get("/search/account", searchProfile.searchProfile);
 router.put("/search/account", searchProfile.followProfile);
 router.delete("/search/account", searchProfile.unfollowProfile);
 router.get("/getpostdetails", getPostDetails.getPostDetails);
+router.get("/feed", feed.getFeed);
 
 module.exports = router;

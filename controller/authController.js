@@ -30,6 +30,7 @@ const signup = async (req, res) => {
   }
 };
 const login = async (req, res) => {
+  console.log("login be called");
   try {
     const { email, username, password } = req.body;
     const query = (email==null)?User.where({ username: username }):User.where({ email: email });
