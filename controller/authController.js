@@ -30,7 +30,7 @@ const signup = async (req, res) => {
   }
 };
 const login = async (req, res) => {
-  console.log("login be called");
+  console.log("login is called");
   try {
     const { email, username, password } = req.body;
     const query = (email==null)?User.where({ username: username }):User.where({ email: email });
@@ -54,7 +54,7 @@ const login = async (req, res) => {
     });
     const { jwtToken, password: newpass, ...other } = user._doc;
 
-    console.log(user.username + " log in successful")
+    console.log("successful")
     res.status(200).send({
       status: "success",
       message: "logged in successfully",

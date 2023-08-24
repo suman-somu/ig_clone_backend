@@ -48,7 +48,7 @@ console.log("getFeed called");
     //sort the postidlist
     postidlist = postidlist.sort();
 
-    console.log("post id lists made and returned");
+    console.log( "successful");
     res.status(200).send({
       status: "success",
       message: "feed updated successfully",

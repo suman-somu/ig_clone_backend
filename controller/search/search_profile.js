@@ -23,10 +23,14 @@ const searchProfile = async (req, res) => {
 };
 
 const followProfile = async (req, res) => {
+
+  console.log("inside follow profile")
   try {
     const searchAccountUsername = req.query.searchAccountUsername;
     const username = req.query.username;
     const accessToken = req.query.accessToken;
+
+
 
     const account = await User.findOne({ username: username });
     if(!account) {
@@ -64,7 +68,7 @@ const followProfile = async (req, res) => {
     await account.save();
     await searchAccount.save();
     
-    
+    console.log("successfull")
     res.status(200).send({
       status: "success",
       message: "Account followed",
@@ -78,11 +82,17 @@ const followProfile = async (req, res) => {
 };
 
 const unfollowProfile = async (req, res) => {
+  console.log("inside unfollow profile")
+
   try {
     const searchAccountUsername = req.query.searchAccountUsername;
     const username = req.query.username;
     const accessToken = req.query.accessToken;
 
+    console.log("username", username)
+    console.log("accessToken", accessToken)
+    console.log("searchAccountUsername", searchAccountUsername)
+    
     const account = await User.findOne({ username: username });
     if (!account) {
       return res.status(404).json({ message: "Account not found" });
@@ -116,6 +126,8 @@ const unfollowProfile = async (req, res) => {
     await account.save();
     await searchAccount.save();
 
+
+    console.log("successfull")
     res.status(200).send({
       status: "success",
       message: "Account unfollowed",

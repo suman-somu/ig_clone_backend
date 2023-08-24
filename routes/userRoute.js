@@ -20,6 +20,7 @@ router.get("/search", searchPrediction.searchPrediction);
 router.get("/search/account", searchProfile.searchProfile);
 router.put("/search/account", searchProfile.followProfile);
 router.delete("/search/account", searchProfile.unfollowProfile);
+router.get("/getuserpostdetails", getPostDetails.getUserPostDetails);
 router.get("/getpostdetails", getPostDetails.getPostDetails);
 router.get("/feed", feed.getFeed);
 

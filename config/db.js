@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const URI = "mongodb://localhost:27017/instgram";
+const URI = "mongodb://localhost:27017/ig_clone";
 
 const connectDB = async () => {
   try {

@@ -24,8 +24,8 @@ const filterPublicProfile = (jsonUserData) => {
 };
 
 const filterForSearchUtil = (jsonUserData) => {
-  const { nameofuser, username, profilePicture } = jsonUserData;
-  return { nameofuser, username, profilePicture };
+  const { nameofuser, username, profilePicture, bio, followers, following, posts } = jsonUserData;
+  return { nameofuser, username, profilePicture, bio, followers, following, posts };
 };
 const filterPublicProfileSearch = (jsonUserData) => {
   for (i = 0; i < jsonUserData.length; i++) {

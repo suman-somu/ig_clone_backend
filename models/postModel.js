@@ -8,11 +8,19 @@ const PostSchema = new mongoose.Schema({
   },
   caption: {
     type: String,
-    default: null,
+    default: "",
   },
   filepath: {
     type: [String],
     required: true,
+  },
+  comments: {
+    type: [[String, String]],
+    default: [],
+  },
+  likes: {
+    type: [String],
+    default: [],
   },
 });
 
