@@ -88,10 +88,6 @@ const unfollowProfile = async (req, res) => {
     const searchAccountUsername = req.query.searchAccountUsername;
     const username = req.query.username;
     const accessToken = req.query.accessToken;
-
-    console.log("username", username)
-    console.log("accessToken", accessToken)
-    console.log("searchAccountUsername", searchAccountUsername)
     
     const account = await User.findOne({ username: username });
     if (!account) {
