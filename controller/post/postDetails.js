@@ -61,6 +61,8 @@ const getUserPostDetails = async (req, res) => {
 };
 
 const getPostDetails = async (req, res) => {
+
+  console.log("inside getPostDetails")
   try {
     // console.log(req);
 
@@ -95,6 +97,7 @@ const getPostDetails = async (req, res) => {
     }
 
     console.log(username+" requested post details of "+pid);
+    console.log("successful")
     res.status(200).send({
       status: "success",
       message: "Post details retrieved successfully",

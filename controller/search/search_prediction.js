@@ -4,9 +4,9 @@ const {filterPublicProfileSearch}  = require("../../utils/filter.js");
 
 const searchPrediction = async (req, res) => {
   try {
-    const keywords = req.query["keywords"];
+    const {keywords,currentusername} = req.query;
     const regexPattern = new RegExp(`^${keywords}`, "i");
-    var accounts = await User.find({ username: regexPattern });
+    var accounts = await User.find({ username: regexPattern, username: { $ne: currentusername }});
     if (accounts.length === 0) {
       return res.status(200).send({
         status: "success",
@@ -14,6 +14,7 @@ const searchPrediction = async (req, res) => {
         data: [],
       });
     }
+
 
     accounts = filterPublicProfileSearch(accounts);
     return res.status(200).send({
