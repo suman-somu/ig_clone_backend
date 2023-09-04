@@ -22,6 +22,10 @@ const PostSchema = new mongoose.Schema({
     type: [String],
     default: [],
   },
+  username: {
+    type: String,
+    required: true,
+  }
 });
 
 module.exports = mongoose.model("Post", PostSchema);

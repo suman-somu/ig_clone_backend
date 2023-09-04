@@ -95,7 +95,6 @@ const getPostDetails = async (req, res) => {
         message: "Post not found",
       });
     }
-
     console.log(username+" requested post details of "+pid);
     console.log("successful")
     res.status(200).send({

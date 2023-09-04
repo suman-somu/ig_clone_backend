@@ -37,6 +37,7 @@ const post = async (req, res) => {
         postid: postid,
         caption: caption,
         filepath: filepath,
+        username: username,
       });
 
       //store post in db

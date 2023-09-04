@@ -7,9 +7,9 @@ const newUser1 = new User({
   password: "12qw!@QW",
   birthday: new Date("1990-01-01"),
   mobile: 1234567890,
-  username: "johndoe",
-  email: "johndoe@example.com",
-  bio: "Hello, I'm John!",
+  username: "user1",
+  email: "user1@example.com",
+  bio: "Hello, I'm user1!",
   gender: "male",
 });
 
@@ -21,7 +21,7 @@ const newUser2 = new User({
   mobile: 9876543210,
   username: "user2",
   email: "user2@example.com",
-  bio: "Hi there, I'm Jane!",
+  bio: "Hi there, I'm Jauser2!",
   gender: "female",
 });
 
