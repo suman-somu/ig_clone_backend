@@ -80,11 +80,12 @@ const getFileId = async (req, res) => {
       });
     }
 
+    console.log(post.filepath)
     console.log("successful");
     return res.status(200).send({
       status: "success",
       message: "Post details retrieved successfully",
-      fileid: post.filepath[0],
+      fileid: post.filepath,
     });
   } catch (e) {
     res.status(500).send({
