@@ -80,7 +80,6 @@ const getFileId = async (req, res) => {
       });
     }
 
-    console.log(post.filepath)
     console.log("successful");
     return res.status(200).send({
       status: "success",
