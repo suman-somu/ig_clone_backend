@@ -13,7 +13,7 @@ appwriteUpload = async (filepath) => {
     .setKey(process.env.APPWRITE_APIKEY);
   for (const file of filepath) {
     const path =
-      "/home/suman/myFolder/programming/prsnl projects/instagram_clone/uploads/posts/" +
+      "/home/suman/myFolder/programming/prsnl projects/ig_clone/uploads/posts/" +
       file;
     const newfilename = file + ".jpeg";
     const promise = storage.createFile(
