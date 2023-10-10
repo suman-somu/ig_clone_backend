@@ -3,9 +3,9 @@ const User = require("../models/userModel");
 const tokens = require("../utils/tokens");
 
 const signup = async (req, res) => {
+  console.log("signup called");
   try {
-    const data = req.body;
-    const { nameofuser, birthday, username, password, email } = data;
+    const { nameofuser, birthday, username, password, email } = req.body;
     const createduser = new User({
       nameofuser: nameofuser,
       password: password,
