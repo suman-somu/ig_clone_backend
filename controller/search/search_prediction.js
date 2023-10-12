@@ -1,12 +1,16 @@
 const User = require("../../models/userModel.js");
-const {filterPublicProfileSearch}  = require("../../utils/filter.js");
-
+const { filterPublicProfileSearch } = require("../../utils/filter.js");
 
 const searchPrediction = async (req, res) => {
   try {
-    const {keywords,currentusername} = req.query;
-    const regexPattern = new RegExp(`^${keywords}`, "i");
-    var accounts = await User.find({ username: regexPattern, username: { $ne: currentusername }});
+    const { keywords, currentusername } = req.query;
+    const regexPattern = new RegExp(`^.*${keywords}.*$`, "i");
+    var accounts = await User.find({
+      $and: [
+        { username: regexPattern },
+        { username: { $ne: currentusername } },
+      ],
+    });
     if (accounts.length === 0) {
       return res.status(200).send({
         status: "success",
@@ -15,14 +19,12 @@ const searchPrediction = async (req, res) => {
       });
     }
 
-
     accounts = filterPublicProfileSearch(accounts);
     return res.status(200).send({
       status: "success",
       message: "Accounts found",
       data: accounts,
     });
-
   } catch (error) {
     console.error("Error:", error);
     return res.status(500).send({
@@ -33,4 +35,4 @@ const searchPrediction = async (req, res) => {
   }
 };
 
-module.exports = {searchPrediction};
+module.exports = { searchPrediction };
