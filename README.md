@@ -8,17 +8,15 @@
 
 ### Installation
 
-1. Clone the repository:
-
+1. 
    ```bash
    git clone https://github.com/suman-somu/ig_clone_backend.git
    ```
-2. Install the dependencies:
+2. 
    ```bash
    npm install
    ```
-3. Run:
-
+3. 
    ```bash
    nodemon index.js
    ```
