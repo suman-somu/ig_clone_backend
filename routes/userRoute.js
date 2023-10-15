@@ -6,6 +6,7 @@ const searchPrediction = require("../controller/search/search_prediction");
 const searchProfile = require("../controller/search/search_profile");
 const getPostDetails = require("../controller/post/postDetails");
 const feed = require("../controller/feed/feedController");
+const likeController  = require("../controller/feed/likeController");
 
 
 const multer = require('multer');
@@ -24,5 +25,6 @@ router.get("/getuserpostdetails", getPostDetails.getUserPostDetails);
 router.get("/getpostdetails", getPostDetails.getPostDetails);
 router.get("/feed", feed.getFeed);
 router.get("/getfileid", feed.getFileId);
+router.put("/like", likeController.likeUnlike);
 
 module.exports = router;
